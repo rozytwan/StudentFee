@@ -1,0 +1,50 @@
+﻿@model StudentFee.Models.Fee
+
+@{
+    ViewBag.Title = "Details";
+
+}
+<h2>Details</h2>
+
+<div>
+    <h4>Fee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.First_Installment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.First_Installment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Second_Installment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Second_Installment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_Payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_Payment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Subject_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Subject_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

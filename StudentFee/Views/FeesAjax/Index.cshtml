@@ -1,0 +1,125 @@
+﻿@model IEnumerable<StudentFee.Models.Fee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index", "FeesAjax", FormMethod.Get))
+{
+    <b>Search by:</b>@Html.RadioButton("searchBy", "First_Installment")<text> First</text>
+    @Html.RadioButton("searchBy", "Second_Installment")<text>Second</text><br />
+    @Html.TextBox("Search");<input type="submit" value="Search" />
+}
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @using (Ajax.BeginForm("Create","FeesAjax", new AjaxOptions() { UpdateTargetId = "modal_body", HttpMethod = "Get", OnSuccess = "ShowModal" }))
+    {
+        @Html.AntiForgeryToken()
+        <button id="CreateButton" type="submit" class="btn btn-danger btn-lg">
+            Create
+        </button>
+    }
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First_Installment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Second_Installment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total_Payment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject.Subject_Name)
+        </th>
+        <th colspan="5"><Center>Action</Center> </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.First_Installment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Second_Installment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total_Payment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.Subject_Name)
+        </td>
+        <td>
+
+            @using (Ajax.BeginForm("Edit", "FeesAjax", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "modal_body", HttpMethod = "Get", OnSuccess = "ShowModal" }))
+            {
+
+                <button id="EditButton" type="submit" class="btn btn-warning btn-sm">
+                    Edit
+                </button>
+
+            }
+        </td>
+        <td>
+            @using (Ajax.BeginForm("Details", "FeesAjax", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "modal_body", HttpMethod = "Get", OnSuccess = "ShowModal" }))
+            {
+                <button id="DetailsButton" type="submit" class="btn btn-success btn-sm">
+                    Details
+                </button>
+
+            }
+        </td>
+        <td>
+            @using (Ajax.BeginForm("Delete", "FeesAjax", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "modal_body", HttpMethod = "Get", OnSuccess = "ShowModal" }))
+            {
+
+                <button id="DeleteButton" type="submit" class="btn btn-info btn-sm">
+                    Delete
+                </button>
+
+            }
+        </td>
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>*@
+    </tr>
+}
+
+</table>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
+            </div>
+            <div class="modal-body" id="modal_body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function ShowModal() {
+        $("#myModal").modal('show');
+    }
+</script>

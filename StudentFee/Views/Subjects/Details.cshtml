@@ -1,0 +1,43 @@
+﻿@model StudentFee.Models.Subject
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subject</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time_Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time_Duration)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
